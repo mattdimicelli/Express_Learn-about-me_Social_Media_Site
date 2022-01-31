@@ -3,20 +3,7 @@ import mongoose from 'mongoose';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';  
-import session from 'express-session';  /* stores user sessions across different
-browsers.  The credientials needed to authenticate a user are normally only transmitted
-during the login request.  If authentication succeeds, a session will be established
-and maintained via a cookie set in the user's browser.  So if a client makes a HTTP request,
-and it doesn't contain a session cookie, a new session will be created by express-session.
-Creating a new session:
-     - generates a unique session ID, and stores it in a session cookie so that
-     subsequent requests made by the client can be identified.
-     - creates an empty session object as req.session
-     - depending on the value of saveUninitialized, at the end of the request
-       the session object will be stored in the session store (generally some
-       sort of database)
-Subsequent requests will not contain credients, but rather the unique cookie that
-identifies the session */
+import session from 'express-session';  
 
 import flash from 'connect-flash';  //shows error messages
 import passport from 'passport';  
