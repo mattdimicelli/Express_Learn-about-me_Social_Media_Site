@@ -5,19 +5,7 @@
 
 --INCOMPLETE PROJECT--
 
-A supermarket inventory application that supports all of the CRUD methods, so that
-the user can create, read, update or delete any item, customer, etc.  The items
-can support myriad fields such as item name, department, description, price per 
-unit, price per pound, etc.  The same goes for each customer and item instance 
-(eg. stock).
-
-I initiated this project after completing my first-ever Express application 
-(following along with a tutorial), so this was my first *original* Express app.
-
-### Challenge
-
-The full design requirements from The Odin Project to build an Inventory application
-are detailed [here](https://www.theodinproject.com/paths/full-stack-javascript/courses/nodejs/lessons/inventory-application)
+This is a project adapted from a book called *Express in Action*, by Evan M. Hahn (2016).  Unfortunately, much of the code from the tutorial no longer worked.  As this tutorial really couldn't be followed due to so many issues, I moved onto other things instead of spending the time to fix it.  But many parts of it do work.  It is a simple social media website.  
 
 
 ### Links
@@ -29,44 +17,27 @@ are detailed [here](https://www.theodinproject.com/paths/full-stack-javascript/c
 ### Built with
 
 - Node.js
-- Express app made with express-generator
-- MongoDB
+- Express 
+- express-session 
+- cookie-parser, required for user sessions
+- bcyrpt-nodejs, which hashes passwords to prevent real passwords from being stored in the datbase.  It also allows password "guesses" to be compared to the actual password without using a simple equality check, which keeps the user safe from a timing attack
 - Mongoose
-- EJS
-- Morgan http request logger middleware
-- http-errors for creating http errors in Express
-- debug module, which decorates console.error()
-- cookie-parser middleware
+- EJS for views and partials
+- connect-flash, shows error messages
+- passport, middleware to authenticate requests
 
 
 ### What I learned
 
+Notes that I took when writing this app: 
 
-- I took the time to sketch out the models and their fields on paper.  I had
-learned that due to the complexity of these applications that it is important to 
-do so before coding.
-- I practiced generating a boilerplate/skeleton for the app using the 
-express-generator.
-- How to set up a collection on the MongoDB website, as well as set up the schemas
-and models.  
-- In a previous tutorial about Express, I was provided with a file populatedb.js,
-which can be seen [here](https://raw.githubusercontent.com/hamishwillee/express-locallibrary-tutorial/master/populatedb.js).  This file was used in the tutorial to populate the database
-with some sample data.  I adapted this file for my own database/models, rewriting
-the code which originally used the async module (available on npm) for 
-functions such as async.parellel() and async.series() so that 
-it would instead rely on the JS-native async/await syntax and Promise.all().
-On previous commits of this project I even wrote it using promise-chaining, just
-for practice.  These exercises were my way of ensuring that I understood the code
-100%.  
-- I wrote each of the components of the MVC paradigm.  For the views, I learned
-the utility of using partials for code-reuse and used them for that reason.
-- The challenge that I was working on when I stopped this project was the design 
-requirement of each item having a "number-in-stock" (in the language of my 
-project, that would be how many ItemInstances of each Item are there).  I started
-to write a "virtual property" called "stock" in my Item model, but then I made 
-my life more complicated by realizing that I also wanted a "numberAvailable", 
-since some of the stock could be damaged, or already sold and put on hold for a 
-customer, and that it would be useful to actually know how much of the stock 
-was "available".  This was where I got stuck, because I determined that I would
-need to learn much more Mongoose syntax in order to solve the problem.  Wanting to
-work on some other projects instead, this is where I left this project paused.
+"Express-session allows you to store user sessions across different
+browsers.  The credientials needed to authenticate a user are normally only transmitted during the login request.  If authentication succeeds, a session will be established and maintained via a cookie set in the user's browser.  So if a client makes a HTTP request, and it doesn't contain a session cookie, a new session will be created by express-session.
+
+Creating a new session:
+     - generates a unique session ID, and stores it in a session cookie so that subsequent requests made by the client can be identified.
+     - creates an empty session object as req.session
+     - depending on the value of saveUninitialized, at the end of the request the session object will be stored in the session store (generally some sort of database)
+  
+Subsequent requests will not contain credients, but rather the unique cookie that identifies the session"
+
